@@ -1,0 +1,65 @@
+plugins {
+    alias(libs.plugins.library.application)
+    alias(libs.plugins.kotlin.android)
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.rbs.iso8583lib'
+    compileSdk 35
+
+    defaultConfig {
+        minSdk 26
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    packaging {
+        resources {
+            excludes += ['META-INF/versions/9/OSGI-INF/MANIFEST.MF']
+            excludes += ['META-INF/DEPENDENCIES']
+        }
+    }
+}
+
+dependencies {
+
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+
+    implementation(libs.jpos) // Your jPOS version
+    implementation(libs.xercesimpl)                              // XML parser
+
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.timber)
+    implementation libs.gson // or latest
+
+    //🗃️ Room (Database)
+    implementation(libs.androidx.room.runtime)                       // Core runtime
+    implementation(libs.androidx.room.ktx)                           // Kotlin support
+    implementation libs.room.paging                         // Paging with Room
+//    annotationProcessor("androidx.room:room-compiler:2.6.1")                 // Annotation processing
+    kapt(libs.room.compiler)
+
+    //📱 Lifecycle & MVVM
+    implementation libs.androidx.lifecycle.viewmodel.ktx        // ViewModel
+    implementation libs.androidx.lifecycle.livedata.ktx         // LiveData
+}

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE isopackager SYSTEM "genericpackager.dtd">
+
+<!-- ISO 8583:1987 (ASCII) field descriptions for GenericPackager -->
+
+<isopackager>
+    <isofield id="0" length="4" name="MESSAGE TYPE INDICATOR"
+        class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="1" length="64" name="BIT MAP" class="org.jpos.iso.IFB_BITMAP"/>
+    <isofield id="2" length="19" name="PAN - PRIMARY ACCOUNT NUMBER"
+        class="org.jpos.iso.IFB_LLNUM"/>
+    <isofield id="3" length="6" name="PROCESSING CODE" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="4" length="12" name="AMOUNT, TRANSACTION" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="5" length="12" name="AMOUNT, SETTLEMENT" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="6" length="12" name="AMOUNT, CARDHOLDER BILLING"
+        class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="7" length="10" name="TRANSMISSION DATE AND TIME"
+        class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="8" length="8" name="AMOUNT, CARDHOLDER BILLING FEE"
+        class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="9" length="8" name="CONVERSION RATE, SETTLEMENT"
+        class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="10" length="8" name="CONVERSION RATE, CARDHOLDER BILLING"
+        class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="11" length="6" name="SYSTEM TRACE AUDIT NUMBER"
+        class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="12" length="6" name="TIME, LOCAL TRANSACTION"
+        class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="13" length="4" name="DATE, LOCAL TRANSACTION"
+        class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="14" length="4" name="DATE, EXPIRATION" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="15" length="4" name="DATE, SETTLEMENT" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="16" length="4" name="DATE, CONVERSION" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="17" length="4" name="DATE, CAPTURE" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="18" length="4" name="MERCHANTS CATEGORY CODE" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="19" length="3" name="ACQUIRING INSTITUTION COUNTRY CODE" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="20" length="3" name="PAN EXTENDED COUNTRY CODE" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="21" length="3" name="FORWARDING INSTITUTION COUNTRY CODE" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="22" length="3" name="POINT OF SERVICE ENTRY MODE" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="23" length="3" name="CARD SEQUENCE NUMBER" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="24" length="3" name="NETWORK INTERNATIONAL IDENTIFIER" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="25" length="2" name="POINT OF SERVICE CONDITION CODE" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="26" length="4" name="MESSAGE REASON CODE" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="27" length="1" name="AUTHORIZATION IDENTIFICATION RESP LEN" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="28" length="9" name="ACQUIRER FEE AMOUNT" class="org.jpos.iso.IF_CHAR"/>
+    <isofield id="29" length="9" name="AMOUNT, SETTLEMENT FEE" class="org.jpos.iso.IFA_AMOUNT"/>
+    <isofield id="30" length="8" name="AMOUNT, TRANSACTION PROCESSING FEE" class="org.jpos.iso.IFA_AMOUNT"/>
+    <isofield id="31" length="9" name="AMOUNT, SETTLEMENT PROCESSING FEE" class="org.jpos.iso.IFA_AMOUNT"/>
+    <isofield id="32" length="11" name="ACQUIRING INSTITUTION IDENTIFICATION CODE" class="org.jpos.iso.IFA_LLNUM"/>
+    <isofield id="33" length="11" name="FORWARDING INSTITUTION IDENTIFICATION CODE" class="org.jpos.iso.IFA_LLNUM"/>
+    <isofield id="34" length="28" name="PAN EXTENDED" class="org.jpos.iso.IFA_LLCHAR"/>
+    <isofield id="35" length="37" name="TRACK 2 DATA" class="org.jpos.iso.IFB_LLNUM"/>
+    <isofield id="36" length="104" name="TRACK 3 DATA" class="org.jpos.iso.IFA_LLLCHAR"/>
+    <isofield id="37" length="12" name="RETRIEVAL REFERENCE NUMBER" class="org.jpos.iso.IFA_NUMERIC"/>
+    <isofield id="38" length="6" name="AUTHORIZATION IDENTIFICATION RESPONSE" class="org.jpos.iso.IFA_NUMERIC"/>
+    <isofield id="39" length="2" name="RESPONSE CODE" class="org.jpos.iso.IFA_NUMERIC"/>
+    <isofield id="40" length="3" name="SERVICE RESTRICTION CODE" class="org.jpos.iso.IF_CHAR"/>
+    <isofield id="41" length="8" name="CARD ACCEPTOR TERMINAL IDENTIFICACION" class="org.jpos.iso.IF_CHAR"/>
+    <isofield id="42" length="15" name="CARD ACCEPTOR IDENTIFICATION CODE" class="org.jpos.iso.IFA_NUMERIC" pad="true" />
+    <isofield id="43" length="222" name="CARD ACCEPTOR NAME/LOCATION" class="org.jpos.iso.IF_CHAR"/>
+    <isofield id="44" length="2" name="PIN/CVV VERIFICATION RESULT" class="org.jpos.iso.IF_CHAR"/>
+    <isofield id="45" length="76" name="TRACK 1 DATA" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="46" length="999" name="ADITIONAL DATA - ISO" class="org.jpos.iso.IFA_LLLCHAR"/>
+    <isofield id="47" length="999" name="ADITIONAL DATA - NATIONAL" class="org.jpos.iso.IFA_LLLCHAR"/>
+    <isofield id="48" length="31" name="REFERENCE TO OTHER TRANSACTION" class="org.jpos.iso.IF_CHAR"/>
+    <isofield id="49" length="3" name="CURRENCY CODE, TRANSACTION" class="org.jpos.iso.IFA_NUMERIC"/>
+    <isofield id="50" length="3" name="CURRENCY CODE, SETTLEMENT" class="org.jpos.iso.IFA_NUMERIC"/>
+    <isofield id="51" length="3" name="CURRENCY CODE, CARDHOLDER BILLING" class="org.jpos.iso.IFB_NUMERIC"/>
+    <isofield id="52" length="8" name="PIN DATA" class="org.jpos.iso.IFB_BINARY"/>
+    <isofield id="53" length="48" name="SECURITY-RELATED CONTROL INFORMATION" class="org.jpos.iso.IFA_BINARY"/>
+    <isofield id="54" length="120" name="ADJUSTMENT AMOUNT" class="org.jpos.iso.IFA_LLLCHAR"/>
+    <isofield id="55" length="255" name="ICC SYSTEM-RELATED DATA" class="org.jpos.iso.IFB_LLLBINARY"/>
+    <isofield id="56" length="999" name="RESERVED ISO" class="org.jpos.iso.IFA_LLLCHAR"/>
+    <isofield id="57" length="999" name="RESERVED NATIONAL" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="58" length="4000" name="RESERVED NATIONAL" class="org.jpos.iso.IFB_LLLLBINARY"/>
+    <isofield id="59" length="4000" name="RESERVED NATIONAL" class="org.jpos.iso.IFB_LLLLBINARY"/>
+    <!-- <isofield id="60" length="999" name="RESERVED PRIVATE" class="org.jpos.iso.IFA_LLLCHAR" /> -->
+    <isofield id="60" length="999" name="ADITIONAL RESPONSE DATA2" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="61" length="14" name="CARD ISSUER DATA" class="org.jpos.iso.IF_CHAR"/>
+    <isofield id="62" length="999" name="EXTERNAL TRANSACTION ATTRIBUTES" class="org.jpos.iso.IFB_LLLLCHAR"/>
+    <isofield id="63" length="999" name="NEW PIN" class="org.jpos.iso.IFB_LLLCHAR"/>
+    <isofield id="64" length="8" name="MESSAGE AUTHENTICATION CODE FIELD" class="org.jpos.iso.IFB_BINARY"/>
+</isopackager>
