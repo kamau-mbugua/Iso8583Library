@@ -10,7 +10,7 @@ version = '1.0.0'
 
 android {
     namespace 'com.rbs.iso8583lib'
-    compileSdk 35
+    compileSdk 33
 
     defaultConfig {
         minSdk 26
@@ -34,12 +34,12 @@ android {
         jvmTarget = '11'
     }
 
-    packaging {
-        resources {
-            excludes += ['META-INF/versions/9/OSGI-INF/MANIFEST.MF']
-            excludes += ['META-INF/DEPENDENCIES']
-        }
-    }
+//    packaging {
+//        resources {
+//            excludes += ['META-INF/versions/9/OSGI-INF/MANIFEST.MF']
+//            excludes += ['META-INF/DEPENDENCIES']
+//        }
+//    }
 }
 
 dependencies {
