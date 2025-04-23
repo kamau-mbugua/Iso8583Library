@@ -260,6 +260,42 @@ All packing, TCP send/receive, database persistence, retries, and callbacks are 
 
 ---
 
+
+## Setup & Configuration
+
+### Clone the Repository (for development)
+
+```bash
+git clone https://github.com/kamau-mbugua/Iso8583Library.git
+cd Iso8583Library
+```
+
+### Alternatively: Use via JitPack
+
+You can now include the library directly in any project via [JitPack](https://jitpack.io/#kamau-mbugua/Iso8583Library):
+
+#### Step 1: Add JitPack to `settings.gradle` (or `dependencyResolutionManagement` block if using AGP 7.0+)
+
+```groovy
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' } // 👈 Required
+    }
+}
+```
+
+#### Step 2: Add the library as a dependency
+
+```groovy
+dependencies {
+    implementation 'com.github.kamau-mbugua:Iso8583Library:1.0.0'
+}
+```
+---
+
 ## License
 
 This project is released under the **MIT License**. See [LICENSE](LICENSE) for details.
