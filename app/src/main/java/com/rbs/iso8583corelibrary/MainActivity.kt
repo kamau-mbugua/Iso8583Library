@@ -7,7 +7,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.rbs.iso8583lib.expose.Iso8583Core
 import com.rbs.iso8583lib.expose.Iso8583Core.generateSignOnRequests
-import com.rbs.iso8583lib.iso.generateSignOnRequest
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

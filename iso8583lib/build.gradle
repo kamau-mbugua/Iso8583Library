@@ -1,8 +1,12 @@
 plugins {
-    alias(libs.plugins.library.application)
-    alias(libs.plugins.kotlin.android)
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'maven-publish'
 }
+
+group = 'com.github.kamau-mbugua'
+version = '1.0.0'
 
 android {
     namespace 'com.rbs.iso8583lib'
@@ -10,7 +14,6 @@ android {
 
     defaultConfig {
         minSdk 26
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -21,13 +24,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = '11'
     }
+
     packaging {
         resources {
             excludes += ['META-INF/versions/9/OSGI-INF/MANIFEST.MF']
@@ -37,7 +43,6 @@ android {
 }
 
 dependencies {
-
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material
@@ -45,21 +50,30 @@ dependencies {
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
 
-    implementation(libs.jpos) // Your jPOS version
-    implementation(libs.xercesimpl)                              // XML parser
-
+    implementation(libs.jpos)
+    implementation(libs.xercesimpl)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.timber)
-    implementation libs.gson // or latest
+    implementation libs.gson
 
-    //🗃️ Room (Database)
-    implementation(libs.androidx.room.runtime)                       // Core runtime
-    implementation(libs.androidx.room.ktx)                           // Kotlin support
-    implementation libs.room.paging                         // Paging with Room
-//    annotationProcessor("androidx.room:room-compiler:2.6.1")                 // Annotation processing
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    implementation libs.room.paging
     kapt(libs.room.compiler)
 
-    //📱 Lifecycle & MVVM
-    implementation libs.androidx.lifecycle.viewmodel.ktx        // ViewModel
-    implementation libs.androidx.lifecycle.livedata.ktx         // LiveData
+    implementation libs.androidx.lifecycle.viewmodel.ktx
+    implementation libs.androidx.lifecycle.livedata.ktx
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = group
+                artifactId = 'iso8583lib'
+                version = version
+            }
+        }
+    }
 }

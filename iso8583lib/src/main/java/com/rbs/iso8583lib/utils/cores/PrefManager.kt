@@ -2,6 +2,7 @@ package com.rbs.iso8583lib.utils.cores
 
 import android.content.Context
 import android.content.SharedPreferences
+import timber.log.Timber
 
 object PrefManager {
     private const val PREF_NAME = "rbs_iso8583_prefs"
@@ -30,4 +31,23 @@ object PrefManager {
     fun contains(key: String) = prefs.contains(key)
     fun remove(key: String) = prefs.edit().remove(key).apply()
     fun clearAll() = prefs.edit().clear().apply()
+}
+
+
+object TimberInitialization {
+    fun init(debug: Boolean) {
+        Timber.plant(object : Timber.DebugTree() {
+            override fun createStackElementTag(element: StackTraceElement): String {
+                val filename = element.fileName.substringBefore(".")
+                return "Timber--:$filename. --:${element.methodName} --:(Ln${element.lineNumber} ---> )"
+            }
+        })
+    }
+    fun initRelease() {
+        Timber.plant(object : Timber.Tree() {
+            override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
+               // No-op for release builds
+            }
+        })
+    }
 }

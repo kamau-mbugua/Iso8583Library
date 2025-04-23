@@ -9,8 +9,8 @@ class App : Application() {
 
         Iso8583Core.init(
             app = this,
-            connectionIp = "196.13.200.254",
-            connectionPort = "3010"
+            connectionIp = "192.168.1.254",// change this to your server IP
+            connectionPort = "55555" // change this to your server port
         )
     }
 

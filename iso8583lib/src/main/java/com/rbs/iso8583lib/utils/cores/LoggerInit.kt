@@ -5,13 +5,13 @@ import timber.log.Timber
 
 object LoggerInit {
     fun init(debug: Boolean = false) {
-        if (debug) {
+//        if (debug) {
             Timber.plant(object : Timber.DebugTree() {
                 override fun createStackElementTag(element: StackTraceElement): String {
                     val filename = element.fileName.substringBefore(".")
-                    return "RBS--:$filename.${element.methodName}() - L${element.lineNumber}"
+                    return "Timber--:$filename.${element.methodName}() - L${element.lineNumber}"
                 }
             })
-        }
+//        }
     }
 }

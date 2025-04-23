@@ -13,6 +13,7 @@ import com.rbs.iso8583lib.storage.entity.TransactionEntity
 import com.rbs.iso8583lib.transaction.TransactionManager
 import com.rbs.iso8583lib.utils.cores.LoggerInit
 import com.rbs.iso8583lib.utils.cores.PrefManager
+import com.rbs.iso8583lib.utils.cores.TimberInitialization
 import com.rbs.iso8583lib.utils.cores.extensions.toJson
 import com.rbs.iso8583lib.utils.packager.PackagerProvider
 import com.rbs.iso8583lib.utils.transactionTypesIdentifiers.MessageTypeIdentifiers
@@ -32,6 +33,9 @@ object Iso8583Core {
     private lateinit var connectionIp: String
 
     fun init(app: Application, debug: Boolean = false, connectionPort: String, connectionIp: String) {
+        // Initialize Timber
+        LoggerInit.init(debug)
+
         // Initialize SharedPreferences
         Timber.e("Iso8583Coreinit: $connectionPort, $connectionIp")
         this.connectionPort = connectionPort
@@ -39,8 +43,6 @@ object Iso8583Core {
 
         PrefManager.init(app)
 
-        // Initialize Timber
-        LoggerInit.init(debug)
 
         // Initialize Room DB (singleton cached inside Room itself)
         AppDatabase.getDatabase(app)
