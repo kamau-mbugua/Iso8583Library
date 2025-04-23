@@ -3,6 +3,10 @@ plugins {
     alias(libs.plugins.kotlin.android)
 }
 
+
+def props = new Properties()
+props.load(new FileInputStream(rootDir.absolutePath + "/local.properties"))
+
 android {
     namespace 'com.rbs.iso8583corelibrary'
     compileSdk 35
@@ -15,12 +19,21 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "ISO8583_HOST", "\"${props['iso8583.ip']}\""
+            buildConfigField "String", "ISO8583_PORT", "\"${props['iso8583.port']}\""
+        }
+        debug{
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "ISO8583_HOST", "\"${props['iso8583.ip']}\""
+            buildConfigField "String", "ISO8583_PORT", "\"${props['iso8583.port']}\""
         }
     }
     compileOptions {
@@ -29,6 +42,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '11'
+    }
+    buildFeatures {
+        buildConfig true
     }
     packaging {
         resources {

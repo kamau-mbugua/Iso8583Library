@@ -50,7 +50,7 @@ dependencies {
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
 
-    implementation(libs.jpos)
+    api (libs.jpos)
     implementation(libs.xercesimpl)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.timber)
@@ -63,6 +63,9 @@ dependencies {
 
     implementation libs.androidx.lifecycle.viewmodel.ktx
     implementation libs.androidx.lifecycle.livedata.ktx
+
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
 }
 
 afterEvaluate {

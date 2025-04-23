@@ -3,6 +3,7 @@ package com.rbs.iso8583lib.expose
 import android.app.Application
 import android.content.Context
 import com.rbs.iso8583lib.communication.JPOSTCPHandler
+import com.rbs.iso8583lib.interfaces.TransactionCallback
 import com.rbs.iso8583lib.iso.*
 import com.rbs.iso8583lib.iso.pack_iso.IsoMessageUtils
 import com.rbs.iso8583lib.model.CardOutputData
@@ -31,10 +32,18 @@ object Iso8583Core {
     private lateinit var viewModel: TciViewModel
     private lateinit var connectionPort: String
     private lateinit var connectionIp: String
+    private var transactionCallback: TransactionCallback? = null
+
+    fun setTransactionCallback(callback: TransactionCallback) {
+        this.transactionCallback = callback
+    }
 
     fun init(app: Application, debug: Boolean = false, connectionPort: String, connectionIp: String) {
         // Initialize Timber
         LoggerInit.init(debug)
+
+
+
 
         // Initialize SharedPreferences
         Timber.e("Iso8583Coreinit: $connectionPort, $connectionIp")
@@ -66,27 +75,27 @@ object Iso8583Core {
             packager = PackagerProvider.get(),
             jposLogger = jposLogger
         ).apply {
-            this.listener = object : JPOSTCPHandler.JPOSListener {
-                override fun onMessageSent(request: org.jpos.iso.ISOMsg) {
 
+            this.listener = object : JPOSTCPHandler.JPOSListener {
+                override fun onMessageSent(request: ISOMsg) {
+                    transactionCallback?.onMessageSent(request)
                 }
 
-                override fun onMessageReceived(response: org.jpos.iso.ISOMsg) {
+                override fun onMessageReceived(response: ISOMsg) {
                     val transactionId = response.getString(11)
                     transactionManager.handleResponse(transactionId, response, null)
+                    transactionCallback?.onMessageReceived(response)
                 }
 
-                override fun onError(error: String, request: org.jpos.iso.ISOMsg) {
-
+                override fun onError(error: String, request: ISOMsg) {
+                    transactionCallback?.onError(error, request)
+                    // Retry logic stays in library
                     val mti = request.getString(0)
                     if (mti == MessageTypeIdentifiers.NETWORK_MANAGEMENT_REQUEST) {
                         val lastTransactionId = transactionManager.getLastTransactionId()
                         if (lastTransactionId != null) {
                             transactionManager.retryTransaction(lastTransactionId)
-                        } else {
                         }
-                    } else {
-
                     }
                 }
             }
@@ -97,7 +106,30 @@ object Iso8583Core {
             jposHandler = jposHandler,
             viewModel = viewModel
         ).apply {
-            this.listener = listener
+//            this.listener = listener
+
+            this.listener = object : TransactionManager.TransactionListener {
+                override fun onTransactionSuccess(response: ISOMsg) {
+                    transactionCallback?.onTransactionSuccess(response)
+                }
+
+                override fun onTransactionFailure(error: String, transactionType: String) {
+                    transactionCallback?.onTransactionFailure(error, transactionType)
+                }
+
+                override fun onReversalInitiated(reversalMessage: ISOMsg) {
+                    // Optional to expose
+                }
+
+                override fun onPerformBatchUpload(batchNumber: String) {
+//                    CoroutineScope(Dispatchers.IO).launch {
+//                        val txns = Iso8583DataProvider.repository?.getTransactionsForSettlement().orEmpty()
+//                        val batchRequest = createBatchUploadRequest(txns, batchNumber)
+//                        delay(2000)
+//                        IsoMessageUtils.sendPackedMessage(batchRequest, viewModel, transactionManager)
+//                    }
+                }
+            }
         }
 
     }
