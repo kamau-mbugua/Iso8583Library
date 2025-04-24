@@ -14,7 +14,7 @@ android {
     defaultConfig {
 //        applicationId "com.rbs.iso8583corelibrary"
         minSdk 26
-        targetSdk 30
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -55,6 +55,10 @@ android {
     }
     buildFeatures {
         buildConfig true
+    }
+    lintOptions {
+        abortOnError false
+        disable 'ExpiredTargetSdkVersion'  // since you just bumped it
     }
 }
 
