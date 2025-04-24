@@ -9,12 +9,12 @@ props.load(new FileInputStream(rootDir.absolutePath + "/local.properties"))
 
 android {
     namespace 'com.rbs.iso8583corelibrary'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
 //        applicationId "com.rbs.iso8583corelibrary"
         minSdk 26
-        targetSdk 33
+        targetSdk 30
         versionCode 1
         versionName "1.0"
 

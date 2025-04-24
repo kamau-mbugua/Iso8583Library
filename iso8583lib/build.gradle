@@ -10,7 +10,7 @@ version = '1.0.0'
 
 android {
     namespace 'com.rbs.iso8583lib'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         minSdk 26
