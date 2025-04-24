@@ -33,14 +33,12 @@ android {
     kotlinOptions {
         jvmTarget = '11'
     }
-
-//    packaging {
-//        resources {
-//            excludes += ['META-INF/versions/9/OSGI-INF/MANIFEST.MF']
-//            excludes += ['META-INF/DEPENDENCIES']
-//        }
-//    }
 }
+
+configurations.configureEach {
+    exclude group: "androidx.profileinstaller", module: "profileinstaller"
+}
+
 
 dependencies {
     implementation libs.androidx.core.ktx

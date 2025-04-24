@@ -9,17 +9,27 @@ props.load(new FileInputStream(rootDir.absolutePath + "/local.properties"))
 
 android {
     namespace 'com.rbs.iso8583corelibrary'
-    compileSdk 35
+    compileSdk 34
 
     defaultConfig {
 //        applicationId "com.rbs.iso8583corelibrary"
         minSdk 26
-        targetSdk 35
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+    }
+
+    // <--- add this:
+    packagingOptions {
+        resources {
+            excludes += [
+                    'META-INF/DEPENDENCIES',
+                    'META-INF/versions/9/OSGI-INF/MANIFEST.MF'
+            ]
+        }
     }
 
     buildTypes {
@@ -29,7 +39,7 @@ android {
             buildConfigField "String", "ISO8583_HOST", "\"${props['iso8583.ip']}\""
             buildConfigField "String", "ISO8583_PORT", "\"${props['iso8583.port']}\""
         }
-        debug{
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "ISO8583_HOST", "\"${props['iso8583.ip']}\""
@@ -46,13 +56,12 @@ android {
     buildFeatures {
         buildConfig true
     }
-//    packaging {
-//        resources {
-//            excludes += ['META-INF/versions/9/OSGI-INF/MANIFEST.MF']
-//            excludes += ['META-INF/DEPENDENCIES']
-//        }
-//    }
 }
+
+configurations.configureEach {
+    exclude group: "androidx.profileinstaller", module: "profileinstaller"
+}
+
 
 dependencies {
 
